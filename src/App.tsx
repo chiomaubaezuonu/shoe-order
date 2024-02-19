@@ -21,21 +21,21 @@ const dataSource = [
     id: 1,
     shoeType: "Loafers",
     manufacturer: "New Balance",
-    color: "red",
+    color: "Red",
     size: 41
   },
   {
     id: 2,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
-    color: "white",
+    color: "White",
     size: 40
   },
   {
     id: 3,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
-    color: "white",
+    color: "White",
     size: 40
   },
   {
@@ -49,14 +49,14 @@ const dataSource = [
     id: 5,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
-    color: "green",
+    color: "Green",
     size: 36
   },
   {
     id: 6,
     shoeType: "Loafers",
     manufacturer: "New Balance",
-    color: "red",
+    color: "Red",
     size: 41
   },
   {
@@ -105,6 +105,7 @@ const dataSource = [
 function App() {
 
   const [shoesType, setShoesType] = useState("")
+  const [shoeColors, setShoeColors] = useState("")
   const [allShoes, setAllShoes] = useState<Shoes[]>(dataSource)
   const [selectedShoes, setSelectedShoes] = useState<Shoes[]>(dataSource)
 
@@ -138,11 +139,11 @@ function App() {
       <Select value={shoesType} onChange={(newShoeType: any) => {
         setShoesType(newShoeType);
         if (newShoeType) {
-        setSelectedShoes(allShoes.filter((item) => {
-          return newShoeType === item.manufacturer
-        }))
+          setSelectedShoes(allShoes.filter((item) => {
+            return newShoeType === item.manufacturer
+          }))
         }
-        else{
+        else {
           setSelectedShoes(allShoes)
         }
 
@@ -152,6 +153,26 @@ function App() {
         <option key="New Balance" value="New Balance">New Balance</option>
         <option key="Nike" value="Nike">Nike</option>
         <option key="Addidas" value="Addidas">Addidas</option>
+      </Select>
+
+      <Select value={shoeColors} onChange={(newShoeColor: any) => {
+        setShoesType(newShoeColor);
+        if (newShoeColor) {
+          setSelectedShoes(allShoes.filter((item) => {
+            return newShoeColor === item.color
+          }))
+        }
+        else {
+          setSelectedShoes(allShoes)
+        }
+
+      }}>
+        <option key="allColours" value="">All Colours</option>
+        <option key="Red" value="Red">Red</option>
+        <option key="Green" value="Green">Green</option>
+        <option key="White" value="White">White</option>
+        <option key="Black" value="Black">Black</option>
+        <option key="Blue" value="Blue">Blue</option>
       </Select>
       <Row style={{}}>
         <Col span={24}>
