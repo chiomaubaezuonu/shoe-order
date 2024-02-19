@@ -4,6 +4,7 @@ import { ColumnsType } from "antd/es/table";
 import { Typography } from 'antd';
 import { Col, Row, Select, Table } from "antd";
 const { Title, Text } = Typography;
+const { Option } = Select;
 
 //To specify object type
 type Shoes = {
@@ -17,72 +18,84 @@ type Shoes = {
 //To specify array type
 const dataSource = [
   {
+    id: 1,
     shoeType: "Loafers",
     manufacturer: "New Balance",
     color: "red",
     size: 41
   },
   {
+    id: 2,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
     color: "white",
     size: 40
   },
   {
+    id: 3,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
     color: "white",
     size: 40
   },
   {
+    id: 4,
     shoeType: "Heels",
     manufacturer: "Ego",
     color: "Black",
     size: 38
   },
   {
+    id: 5,
     shoeType: "Ballet Flats",
     manufacturer: "Under Armour",
     color: "green",
     size: 36
   },
   {
+    id: 6,
     shoeType: "Loafers",
     manufacturer: "New Balance",
     color: "red",
     size: 41
   },
   {
+    id: 7,
     shoeType: "Boots",
     manufacturer: "Addidas",
     color: "Black",
     size: 37
   },
   {
+    id: 8,
     shoeType: "Loafers",
     manufacturer: "New Balance",
     color: "Blue",
     size: 39
   },
   {
+    id: 9,
     shoeType: "Sneakers",
     manufacturer: "Nike",
     color: "Blue",
     size: 36
   },
   {
+    id: 10,
     shoeType: "Sneakers",
     manufacturer: "New Balance",
     color: "Blue",
     size: 40
   },
   {
+    id: 11,
     shoeType: "Boots",
     manufacturer: "Nike",
     color: "Red",
     size: 42
   },
   {
+    id: 12,
     shoeType: "Heels",
     manufacturer: "Under Armour",
     color: "White",
@@ -91,7 +104,9 @@ const dataSource = [
 ]
 function App() {
 
-  const [type, setType] = useState("")
+  const [shoesType, setShoesType] = useState("")
+  const [allShoes, setAllShoes] = useState<Shoes[]>(dataSource)
+  const [selectedShoes, setSelectedShoes] = useState<Shoes[]>(dataSource)
 
   const columns: ColumnsType<Shoes> = [
     {
@@ -119,19 +134,31 @@ function App() {
   return (
     <div className="App">
       <h1>Oma's Shoes</h1>
-      <select key="manufacturer" value="All Manufacturers" onChange={}>
-        All Manufacturers
-        <option value="Under Armour">Under Armour</option>
-        <option value="New Balance">New Balance</option>
-        <option value="Nike">Nike</option>
-        <option value="Addidas">Addidas</option>
-      </select>
+
+      <Select value={shoesType} onChange={(newShoeType: any) => {
+        setShoesType(newShoeType);
+        if (newShoeType) {
+        setSelectedShoes(allShoes.filter((item) => {
+          return newShoeType === item.manufacturer
+        }))
+        }
+        else{
+          setSelectedShoes(allShoes)
+        }
+
+      }}>
+        <option key="allManufacturers" value="">All Manufacturers</option>
+        <option key="underArmour" value="Under Armour">Under Armour</option>
+        <option key="New Balance" value="New Balance">New Balance</option>
+        <option key="Nike" value="Nike">Nike</option>
+        <option key="Addidas" value="Addidas">Addidas</option>
+      </Select>
       <Row style={{}}>
         <Col span={24}>
         </Col>
       </Row>
       <Table
-        dataSource={dataSource}
+        dataSource={selectedShoes}
         columns={columns}
         locale={{ emptyText: "No orders found" }}
       />
