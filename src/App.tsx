@@ -1,24 +1,95 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  //To specify object type
+  type Shoes = {
+    shoeType: string,
+    manufacturer: string,
+    color: string,
+    size: number
+
+  }
+  //To specify array type
+  const shoes = [
+    {
+      shoeType: "Loafers",
+      manufacturer: "New Balance",
+      color: "red",
+      size: 41
+    },
+    {
+      shoeType: "Ballet Flats",
+      manufacturer: "Under Armour",
+      color: "white",
+      size: 40
+    },
+    {
+      shoeType: "Ballet Flats",
+      manufacturer: "Under Armour",
+      color: "white",
+      size: 40
+    },
+    {
+      shoeType: "Heels",
+      manufacturer: "Ego",
+      color: "Black",
+      size: 38
+    },
+    {
+      shoeType: "Ballet Flats",
+      manufacturer: "Under Armour",
+      color: "green",
+      size: 36
+    },
+    {
+      shoeType: "Loafers",
+      manufacturer: "New Balance",
+      color: "red",
+      size: 41
+    },
+    {
+      shoeType: "Boots",
+      manufacturer: "Addidas",
+      color: "Black",
+      size: 37
+    },
+    {
+      shoeType: "Loafers",
+      manufacturer: "New Balance",
+      color: "Blue",
+      size: 39
+    },
+    {
+      shoeType: "Sneakers",
+      manufacturer: "Nike",
+      color: "Blue",
+      size: 36
+    },
+    {
+      shoeType: "Sneakers",
+      manufacturer: "New Balance",
+      color: "Blue",
+      size: 40
+    },
+    {
+      shoeType: "Boots",
+      manufacturer: "Nike",
+      color: "Red",
+      size: 42
+    },
+    {
+      shoeType: "Heels",
+      manufacturer: "Under Armour",
+      color: "White",
+      size: 40
+    },
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Oma's Shoes</h1>
     </div>
   );
 }
