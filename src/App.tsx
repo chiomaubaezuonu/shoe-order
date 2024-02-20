@@ -155,13 +155,19 @@ function App() {
         <option key="New Balance" value="New Balance">New Balance</option>
         <option key="Nike" value="Nike">Nike</option>
         <option key="Addidas" value="Addidas">Addidas</option>
+        <option key="Ego" value="Ego">Ego</option>
       </Select>
 
       <Select value={shoeColors} onChange={(newShoeColor: any) => {
         setShoeColors(newShoeColor);
-        if (newShoeColor) {
+        if (newShoeColor && !shoesManufacturers) {
           setSelectedShoes(allShoes.filter((item) => {
             return newShoeColor === item.color
+          }))
+        }
+        else if (newShoeColor && shoesManufacturers) {
+          setSelectedShoes(selectedShoes.filter((item) => {
+            return newShoeColor === item.color && shoesManufacturers === item.manufacturer
           }))
         }
         else {
@@ -184,6 +190,13 @@ function App() {
             return newShoeSize === item.size
           }))
         }
+
+        else if (newShoeSize && shoesManufacturers && shoeColors) {
+          setSelectedShoes(allShoes.filter((item) => {
+            return newShoeSize && shoesManufacturers === item.manufacturer
+
+          }))
+        }
         else {
           setSelectedShoes(allShoes)
         }
@@ -199,7 +212,7 @@ function App() {
       </Select>
 
       <Select value={shoeTypes} onChange={(newShoeType: any) => {
-        setShoeSizes(newShoeType);
+        setShoeTypes(newShoeType);
         if (newShoeType) {
           setSelectedShoes(allShoes.filter((item) => {
             return newShoeType === item.shoeType
@@ -217,7 +230,6 @@ function App() {
         <option key="Sneakers" value="Sneakers">Sneakers</option>
         <option key="Loafers" value="Loafers">Loafers</option>
       </Select>
-
       <Row style={{}}>
         <Col span={24}>
         </Col>
