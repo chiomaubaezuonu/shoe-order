@@ -145,6 +145,7 @@ function App() {
             return newShoeManufacturer === item.manufacturer
           }))
         }
+        
         else {
           setSelectedShoes(allShoes)
         }
@@ -165,8 +166,9 @@ function App() {
             return newShoeColor === item.color
           }))
         }
-        else if (newShoeColor && shoesManufacturers) {
-          setSelectedShoes(selectedShoes.filter((item) => {
+         if (newShoeColor && shoesManufacturers) {
+          console.log(newShoeColor, shoesManufacturers)
+          setSelectedShoes(allShoes.filter((item) => {
             return newShoeColor === item.color && shoesManufacturers === item.manufacturer
           }))
         }
@@ -191,10 +193,9 @@ function App() {
           }))
         }
 
-        else if (newShoeSize && shoesManufacturers && shoeColors) {
+     if(shoesManufacturers && newShoeSize){
           setSelectedShoes(allShoes.filter((item) => {
-            return newShoeSize && shoesManufacturers === item.manufacturer
-
+            return shoesManufacturers === item.manufacturer && newShoeSize === item.size
           }))
         }
         else {
