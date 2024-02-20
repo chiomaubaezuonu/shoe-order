@@ -106,7 +106,8 @@ function App() {
 
   const [shoesType, setShoesType] = useState("")
   const [shoeColors, setShoeColors] = useState("")
-  const [allShoes, setAllShoes] = useState<Shoes[]>(dataSource)
+  const [shoeSizes, setShoeSizes] = useState("")
+  const [allShoes] = useState<Shoes[]>(dataSource)
   const [selectedShoes, setSelectedShoes] = useState<Shoes[]>(dataSource)
 
   const columns: ColumnsType<Shoes> = [
@@ -156,7 +157,7 @@ function App() {
       </Select>
 
       <Select value={shoeColors} onChange={(newShoeColor: any) => {
-        setShoesType(newShoeColor);
+        setShoeColors(newShoeColor);
         if (newShoeColor) {
           setSelectedShoes(allShoes.filter((item) => {
             return newShoeColor === item.color
@@ -174,6 +175,28 @@ function App() {
         <option key="Black" value="Black">Black</option>
         <option key="Blue" value="Blue">Blue</option>
       </Select>
+
+      <Select value={shoeSizes} onChange={(newShoeSize:any) => {
+        setShoeSizes(newShoeSize);
+        if (newShoeSize) {
+          setSelectedShoes(allShoes.filter((item) => {
+            return newShoeSize === item.size
+          }))
+        }
+        else {
+          setSelectedShoes(allShoes)
+        }
+
+      }}>
+        <option key="allSizes" value="">All Sizes</option>
+        <option key="40" value={40}>40</option>
+        <option key="42" value={42}>42</option>
+        <option key="36" value={36}>36</option>
+        <option key="37" value={37}>37</option>
+        <option key="38" value={38}>38</option>
+        <option key="41" value={41}>41</option>
+      </Select>
+
       <Row style={{}}>
         <Col span={24}>
         </Col>
