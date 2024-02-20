@@ -104,7 +104,8 @@ const dataSource = [
 ]
 function App() {
 
-  const [shoesType, setShoesType] = useState("")
+  const [shoesManufacturers, setShoesManufacturers] = useState("")
+  const [shoeTypes, setShoeTypes] = useState("")
   const [shoeColors, setShoeColors] = useState("")
   const [shoeSizes, setShoeSizes] = useState("")
   const [allShoes] = useState<Shoes[]>(dataSource)
@@ -137,11 +138,11 @@ function App() {
     <div className="App">
       <h1>Oma's Shoes</h1>
 
-      <Select value={shoesType} onChange={(newShoeType: any) => {
-        setShoesType(newShoeType);
-        if (newShoeType) {
+      <Select value={shoesManufacturers} onChange={(newShoeManufacturer: any) => {
+        setShoesManufacturers(newShoeManufacturer);
+        if (newShoeManufacturer) {
           setSelectedShoes(allShoes.filter((item) => {
-            return newShoeType === item.manufacturer
+            return newShoeManufacturer === item.manufacturer
           }))
         }
         else {
@@ -176,7 +177,7 @@ function App() {
         <option key="Blue" value="Blue">Blue</option>
       </Select>
 
-      <Select value={shoeSizes} onChange={(newShoeSize:any) => {
+      <Select value={shoeSizes} onChange={(newShoeSize: any) => {
         setShoeSizes(newShoeSize);
         if (newShoeSize) {
           setSelectedShoes(allShoes.filter((item) => {
@@ -195,6 +196,26 @@ function App() {
         <option key="37" value={37}>37</option>
         <option key="38" value={38}>38</option>
         <option key="41" value={41}>41</option>
+      </Select>
+
+      <Select value={shoeTypes} onChange={(newShoeType: any) => {
+        setShoeSizes(newShoeType);
+        if (newShoeType) {
+          setSelectedShoes(allShoes.filter((item) => {
+            return newShoeType === item.shoeType
+          }))
+        }
+        else {
+          setSelectedShoes(allShoes)
+        }
+
+      }}>
+        <option key="allTypes" value="">All Types</option>
+        <option key="Heels" value="Heels">Heels</option>
+        <option key="Boots" value="Boots">Boots</option>
+        <option key="Ballet Flats" value="Ballet Flats">Ballet Flats</option>
+        <option key="Sneakers" value="Sneakers">Sneakers</option>
+        <option key="Loafers" value="Loafers">Loafers</option>
       </Select>
 
       <Row style={{}}>
