@@ -169,7 +169,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{background:'#301934', color:'white', marginTop:"0", padding:'1rem'}}>Oma's Shoes</h1>
+      <h1 style={{ background: '#301934', color: '#EFDEFF', marginTop: "0", padding: '1rem' }}>Oma's Shoes</h1>
 
       <Select value={shoesManufacturers} onChange={(newShoeManufacturer: any) => {
         setShoesManufacturers(newShoeManufacturer);
