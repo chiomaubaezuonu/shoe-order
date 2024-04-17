@@ -104,10 +104,10 @@ const dataSource = [
 ]
 function App() {
 
-  const [shoesManufacturers, setShoesManufacturers] = useState("")
-  const [shoeTypes, setShoeTypes] = useState("")
-  const [shoeColors, setShoeColors] = useState("")
-  const [shoeSizes, setShoeSizes] = useState("")
+  const [shoesManufacturers, setShoesManufacturers] = useState<string>("")
+  const [shoeTypes, setShoeTypes] = useState<string>("")
+  const [shoeColors, setShoeColors] = useState<string>("")
+  const [shoeSizes, setShoeSizes] = useState<number>(0)
   const [allShoes] = useState<Shoes[]>(dataSource)
   const [selectedShoes, setSelectedShoes] = useState<Shoes[]>(dataSource)
 
@@ -115,7 +115,7 @@ function App() {
     {
       title: "Shoe Type",
       dataIndex: "shoeType",
-      key: "shoeTYpe",
+      key: "shoeType",
     },
     {
       title: "Manufacturers",
@@ -134,22 +134,46 @@ function App() {
     }
   ]
 
+  // const allShoes = [];
+  const shoeOrder = (shoeSizes: number, shoesManufacturers: string, shoeColors: string, shoeTypes: string) => {
+    //  Set the states
+    setShoeSizes(shoeSizes)
+    setShoesManufacturers(shoesManufacturers)
+    setShoeTypes(shoeTypes)
+    setShoeColors(shoeColors)
+
+    // eg: line 146-156, do not comment out
+    // let filteredRecords = allShoes; // 100
+    // filteredRecords = shoeSize
+    //   ? filteredRecords.filter((item) => shoeSize === item.size) // 95
+    //   : filteredRecords;
+    // filteredRecords = manufacturer
+    //   ? filteredRecords.filter((rec) => rec.manufacturer === manufacturer) // 70
+    //   : filteredRecords;
+    // filteredRecords = color
+    //   ? filteredRecords.filter((rec) => rec.color === color)
+    //   : filteredRecords;
+    // setFilteredRecords(filteredRecords)
+
+
+
+    let selectedShoes = allShoes;
+    selectedShoes = shoeSizes ? selectedShoes.filter((item) => item.size === shoeSizes) : selectedShoes;
+    selectedShoes = shoeColors ? selectedShoes.filter((item) => item.color === shoeColors) : selectedShoes
+    selectedShoes = shoeTypes ? selectedShoes.filter((item) => item.shoeType === shoeTypes) : selectedShoes
+    selectedShoes = shoesManufacturers ? selectedShoes.filter((item) => item.manufacturer === shoesManufacturers) : selectedShoes
+    setSelectedShoes(selectedShoes)
+  };
+
+
+
   return (
     <div className="App">
-      <h1>Oma's Shoes</h1>
+      <h1 style={{background:'#301934', color:'white', marginTop:"0", padding:'1rem'}}>Oma's Shoes</h1>
 
       <Select value={shoesManufacturers} onChange={(newShoeManufacturer: any) => {
         setShoesManufacturers(newShoeManufacturer);
-        if (newShoeManufacturer) {
-          setSelectedShoes(allShoes.filter((item) => {
-            return newShoeManufacturer === item.manufacturer
-          }))
-        }
-        
-        else {
-          setSelectedShoes(allShoes)
-        }
-
+        shoeOrder(shoeSizes, newShoeManufacturer, shoeColors, shoeTypes)
       }}>
         <option key="allManufacturers" value="">All Manufacturers</option>
         <option key="underArmour" value="Under Armour">Under Armour</option>
@@ -159,24 +183,11 @@ function App() {
         <option key="Ego" value="Ego">Ego</option>
       </Select>
 
-      <Select value={shoeColors} onChange={(newShoeColor: any) => {
+      <Select value={shoeColors} onChange={(newShoeColor) => {
         setShoeColors(newShoeColor);
-        if (newShoeColor && !shoesManufacturers) {
-          setSelectedShoes(allShoes.filter((item) => {
-            return newShoeColor === item.color
-          }))
-        }
-         if (newShoeColor && shoesManufacturers) {
-          console.log(newShoeColor, shoesManufacturers)
-          setSelectedShoes(allShoes.filter((item) => {
-            return newShoeColor === item.color && shoesManufacturers === item.manufacturer
-          }))
-        }
-        else {
-          setSelectedShoes(allShoes)
-        }
-
-      }}>
+        shoeOrder(shoeSizes, shoesManufacturers, newShoeColor, shoeTypes)
+      }}
+      >
         <option key="allColours" value="">All Colours</option>
         <option key="Red" value="Red">Red</option>
         <option key="Green" value="Green">Green</option>
@@ -187,23 +198,9 @@ function App() {
 
       <Select value={shoeSizes} onChange={(newShoeSize: any) => {
         setShoeSizes(newShoeSize);
-        if (newShoeSize) {
-          setSelectedShoes(allShoes.filter((item) => {
-            return newShoeSize === item.size
-          }))
-        }
-
-     if(shoesManufacturers && newShoeSize){
-          setSelectedShoes(allShoes.filter((item) => {
-            return shoesManufacturers === item.manufacturer && newShoeSize === item.size
-          }))
-        }
-        else {
-          setSelectedShoes(allShoes)
-        }
-
+        shoeOrder(newShoeSize, shoesManufacturers, shoeColors, shoeTypes)
       }}>
-        <option key="allSizes" value="">All Sizes</option>
+        <option key="allSizes" value={0}>All Sizes</option>
         <option key="40" value={40}>40</option>
         <option key="42" value={42}>42</option>
         <option key="36" value={36}>36</option>
@@ -212,17 +209,9 @@ function App() {
         <option key="41" value={41}>41</option>
       </Select>
 
-      <Select value={shoeTypes} onChange={(newShoeType: any) => {
+      <Select value={shoeTypes} onChange={(newShoeType: string) => {
         setShoeTypes(newShoeType);
-        if (newShoeType) {
-          setSelectedShoes(allShoes.filter((item) => {
-            return newShoeType === item.shoeType
-          }))
-        }
-        else {
-          setSelectedShoes(allShoes)
-        }
-
+        shoeOrder(shoeSizes, shoesManufacturers, shoeColors, newShoeType)
       }}>
         <option key="allTypes" value="">All Types</option>
         <option key="Heels" value="Heels">Heels</option>
