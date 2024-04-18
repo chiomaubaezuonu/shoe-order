@@ -8,15 +8,14 @@
   min-width: 8rem;
 }
 
-Select {
-  margin-right: 4rem;
-}
-:where(.css-dev-only-do-not-override-1xg9z9n).ant-select-single {
+
+
+.ant-select-single {
   margin-right: 1rem;
 }
 
 @media(max-width:600px){
-  :where(.css-dev-only-do-not-override-1xg9z9n).ant-select-single {
+  .ant-select-single {
     margin-right: 1rem;
     margin-top: 1rem;
   }
